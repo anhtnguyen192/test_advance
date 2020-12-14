@@ -57,4 +57,18 @@
         </field>
     </record>
 
+    <record id="task_num_smart_button" model="ir.ui.view">
+        <field name="name">task.num.buttons</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="get_tasks">
+<!--                        icon="fa-car">-->
+                    <field string="Task" name="task_count" widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
 </odoo>

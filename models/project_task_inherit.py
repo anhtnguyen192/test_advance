@@ -1,21 +1,6 @@
 from odoo import models, fields, api
 
 
-class SaleOrderInherit(models.Model):
-    _inherit = "sale.order"
-    design_file = fields.Binary(string="Design File", readonly=True)
-
-    def create_task_form(self):
-        return {
-            'name': "Create Task",
-            'type': 'ir.actions.act_window',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'create.task',
-            'target': 'new'
-        }
-
-
 class ProjectTaskInherit(models.Model):
     _inherit = "project.task"
     design_file = fields.Binary(string="Design File")
