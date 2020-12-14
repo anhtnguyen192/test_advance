@@ -1,0 +1,60 @@
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="create_task_form" string="Create Task" attrs="{'invisible': [('state' ,'!=', 'draft')]}" group="test_advance.group_sale" type="object" />
+            </xpath>
+            <field name="sale_order_template_id" position="after">
+                <field name="design_file" />
+            </field>
+            <xpath expr="//button[@name='action_confirm'][last()]" position="attributes">
+                <attribute name="attrs">{'invisible': [('design_file' ,'=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="project_task_inherit" model="ir.ui.view">
+        <field name="name">project.task.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <field name="is_1x" invisible="1"/>
+                <field name="is_uid_assigned" invisible="1"/>
+                <button name="accept_task" string="Accept Task" group="test_advance.group_designer" attrs="{'invisible': ['|',('is_uid_assigned', '=', False), ('is_1x' ,'=', True)]}" type="object" />
+            </xpath>
+            <field name="partner_phone" position="after">
+                <field name="stage_id"/>
+                <field name="order_id"/>
+
+            </field>
+            <field name="tag_ids" position="after">
+                <field name="design_file"/>
+            </field>
+            <xpath expr="//header" position="inside">
+                <field name="is_2x" invisible="1"/>
+                <button name="send_for_approval" group="test_advance.group_designer" attrs="{'invisible': ['|',('design_file' ,'=', False), ('is_2x' ,'=', True)]}" string="Send For Approval"  type="object" />
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="is_3x" invisible="1"/>
+                <button name="accept_task_result" string="Accept" group="test_advance.group_manager" attrs="{'invisible': [('is_3x' ,'=', True)]}" type="object" />
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="is_3x" invisible="1"/>
+                <button name="decline_task_result" string="Decline" group="test_advance.group_manager" attrs="{'invisible': [('is_3x' ,'=', True)]}" type="object" />
+            </xpath>
+
+
+        </field>
+    </record>
+
+</odoo>
